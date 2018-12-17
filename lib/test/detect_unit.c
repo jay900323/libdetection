@@ -304,6 +304,12 @@ Tsqli_print(void)
     s_sqli_attacks({CSTR_LEN("print '1'")});
 }
 
+static void
+Tsqli_semicolons_opt(void)
+{
+    s_sqli_attacks({CSTR_LEN("1 SELECT 1 SELECT 2")});
+}
+
 int
 main(void)
 {
@@ -344,6 +350,7 @@ main(void)
         {"delete", Tsqli_delete},
         {"0x", Tsqli_0x},
         {"print", Tsqli_print},
+        {"semicolons_opt", Tsqli_semicolons_opt},
         CU_TEST_INFO_NULL
     };
     CU_SuiteInfo suites[] = {
