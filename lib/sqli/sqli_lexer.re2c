@@ -531,6 +531,9 @@ sqli_get_token(
       <INITIAL> 'DISTINCT'/key_end {
           KEYNAME_SET_RET(ctx, arg, DISTINCT, SQLI_KEY_INSTR);
       }
+      <INITIAL> 'DISTINCTROW'/key_end {
+          KEYNAME_SET_RET(ctx, arg, DISTINCTROW, SQLI_KEY_INSTR);
+      }
       <INITIAL> 'VARIADIC'/key_end {
           KEYNAME_SET_RET(ctx, arg, VARIADIC, SQLI_KEY_INSTR);
       }

@@ -31,7 +31,7 @@ sqli_parser_error(struct sqli_detect_ctx *ctx, const char *s)
 %token TOK_START_DATA
 %token TOK_START_STRING
 %token TOK_START_RCE
-%token <data> TOK_DISTINCT TOK_VARIADIC
+%token <data> TOK_DISTINCT TOK_DISTINCTROW TOK_VARIADIC
 %token <data> TOK_DATA TOK_NAME TOK_OPERATOR TOK_NUM
 %token <data> '.' ',' '(' ')' '*' '[' ']' ';' '=' ':' '{' '}' '-' '+'
 %token <data> TOK_OR TOK_OR2 TOK_AND TOK_IS TOK_NOT TOK_DIV
@@ -559,6 +559,7 @@ important_operator: TOK_DIV
 
 select_distinct_opt:
         | TOK_DISTINCT
+        | TOK_DISTINCTROW
         | TOK_ALL
         ;
 
@@ -800,6 +801,9 @@ all_distinct_opt:
             sqli_store_data(ctx, &$tk);
         }
         | TOK_DISTINCT[tk] {
+            sqli_store_data(ctx, &$tk);
+        }
+        | TOK_DISTINCTROW[tk] {
             sqli_store_data(ctx, &$tk);
         }
         ;
